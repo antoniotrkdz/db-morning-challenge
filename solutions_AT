@@ -1,0 +1,17 @@
+SELECT book_id,book_name,max_reservation_time, avg(max_reservation_time) FROM books
+GROUP BY book_id
+HAVING max_reservation_time > (SELECT avg(max_reservation_time) FROM books)
+
+#First solution (first bullet point)
+SELECT name, COUNT(post_num) FROM mentors
+INNER JOIN posts
+ON Mentors.name = posts.mentor_name
+INNER JOIN Likes
+ON posts.num = Likes.post_num
+GROUP BY mentors.name
+
+#Alternative solution (first bullet point)
+SELECT posts.mentor_name, COUNT(likes.post_num) 
+FROM likes INNER JOIN posts
+ON likes.post_num = posts.num
+GROUP BY posts.mentor_name
